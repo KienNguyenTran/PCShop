@@ -1,0 +1,107 @@
+﻿@model PCShop.Models.HomeModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">                 
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <a>
+                            <form action="~/Product">
+
+                                @Html.TextBox("SearchString", "", new { @class = "form-control" })
+
+                                <button type="submit" class="site-btn">SEARCH</button>
+
+                            </form>
+                        </a>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>0522529576</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+
+                </div>
+                
+               
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>Department</h4>
+                            <ul>
+                                @foreach (var item in Model.ListCategories)
+                                {
+                                    <li>@Html.ActionLink(item.name, "Category", "Category", new { @ID = item.id }, null)</li>
+                                }
+
+
+                            </ul>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="col-lg-9 col-md-7">
+
+                    <div class="filter__item">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5">
+                                
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span>16</span> Products found</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in Model.ListProducts)
+                        {
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="#">
+                                        <img src="~/Asset/img/hinh Product/@item.Avatar" />
+
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="@Url.Action("Product", "Product", new {ID=item.id})">@item.name</a></h6>
+                                        <h5>@string.Format("{0:0,00}", item.price) VND</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>

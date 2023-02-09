@@ -1,0 +1,105 @@
+﻿@model PCShop.Models.Product
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = @Model.id;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                             src="~/Asset/img/hinh Product/@Model.Avatar" alt="">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+
+                    <h3>@Model.name</h3>
+
+
+                    <div class="product__details__price">@string.Format("{0:0,00}", Model.price) VND</div>
+
+
+                 
+                        <div class="product__details__quantity">
+                            <div class="input-group mb-3 input-spinner">
+                                <input type="text" id="ipQuantity" class="form-control" value="1">
+                            </div>
+                        </div>
+                        <a href="#" class="primary-btn" id="addtocart">
+
+                            Add To Cart
+                        </a>
+                        <ul>
+                            <li><b>Availability</b> <span>In Stock</span></li>
+
+                        </ul>
+                    </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                               aria-selected="true">Description</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Products Infomation</h6>
+                                <p>
+                                    <table>
+                                        <tr>
+                                            <td style="white-space: pre-wrap; ">@Model.descript</td>
+                                            
+                                        </tr>
+                                    </table>
+                                    
+                                </p>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->

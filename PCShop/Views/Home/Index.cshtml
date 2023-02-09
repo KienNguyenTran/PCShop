@@ -1,0 +1,252 @@
+﻿@model PCShop.Models.HomeModel
+
+<!-- Hero Section Begin -->
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Components</span>
+                    </div>
+                    <ul>
+                        @foreach (var item in Model.ListCategories)
+                        {
+                            <li>
+                                @Html.ActionLink(item.name, "Category", "Category", new { @ID = item.id }, null)
+                            </li>
+
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <a>
+                            <form action="~/Product">
+
+                                @Html.TextBox("SearchString", "", new { @class = "form-control" })
+
+                                <button  type="submit" class="site-btn">SEARCH</button>
+
+                            </form>
+                        </a>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>0934974264</h5>
+                            <span>Support 24/7</span>
+                        </div>
+                    </div>
+
+                </div>
+                <a href="#">
+
+                    <div class="hero__item set-bg" data-setbg="#">
+                        <img class="hero__item set-bg" src="~/Asset/img/hero/card.jpg" alt="Alternate Text" />
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Featured Section Begin -->
+<section class="featured spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Featured Product</h2>
+                </div>
+
+                <div class="featured__controls">
+                    <ul>
+                        <li class="active" data-filter="*">All</li>
+                        <li data-filter=".card">Card</li>
+                        <li data-filter=".main">Main</li>
+                        <li data-filter=".fan">Fan</li>
+                        <li data-filter=".cpu">CPU</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row featured__filter">
+            @foreach (var item in Model.ListProducts.Where(n => n.category_id == 11).Take(4))
+            {
+                <a href="@Url.Action("Product", "Product", new {ID=item.id})">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges card">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="#">
+                                <img src="~/Asset/img/hinh Product/@item.Avatar">
+
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="@Url.Action("Product", "Product", new {ID=item.id})">@item.name</a></h6>
+                                <h5>@string.Format("{0:0,00}", item.price) VND</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            }
+
+            @foreach (var item in Model.ListProducts.Where(n => n.category_id == 2).Take(4))
+            {
+                <a href="@Url.Action("Product", "Product", new {ID=item.id})">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges main">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="#">
+                                <img src="~/Asset/img/hinh Product/@item.Avatar">
+
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="@Url.Action("Product", "Product", new {ID=item.id})">@item.name</a></h6>
+                                <h5>@string.Format("{0:0,00}", item.price) VND</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            }
+
+            @foreach (var item in Model.ListProducts.Where(n => n.category_id == 10).Take(4))
+            {
+                <a href="@Url.Action("Product", "Product", new {ID=item.id})">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fan">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="#">
+                                <img src="~/Asset/img/hinh Product/@item.Avatar">
+
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="@Url.Action("Product", "Product", new {ID=item.id})">@item.name</a></h6>
+                                <h5>@string.Format("{0:0,00}", item.price) VND</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            }
+
+            @foreach (var item in Model.ListProducts.Where(n => n.category_id == 1).Take(4))
+            {
+                <a href="@Url.Action("Product", "Product", new {ID=item.id})">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges cpu">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="#">
+                                <img src="~/Asset/img/hinh Product/@item.Avatar">
+
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="@Url.Action("Product", "Product", new {ID=item.id})">@item.name</a></h6>
+                                <h5>@string.Format("{0:0,00}", item.price) VND</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            }
+
+
+
+
+        </div>
+    </div>
+</section>
+<!-- Featured Section End -->
+<!-- Latest Product Section Begin -->
+<section class="latest-product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="latest-product__text">
+                    <h4>Latest Products</h4>
+                    @foreach (var item in Model.ListProducts.Where(n => n.category_id == 11).Take(3))
+                    {
+
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="@Url.Action("Product", "Product", new {ID=item.id})" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Asset/img/hinh Product/@item.Avatar" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>@item.name</h6>
+                                        <span>@string.Format("{0:0,00}", item.price) VND</span>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="latest-product__text">
+
+                    <h4>Top Rated Products</h4>
+                    @foreach (var item in Model.ListProducts.Where(n => n.category_id == 2).Take(3))
+                    {
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="@Url.Action("Product", "Product", new {ID=item.id})" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Asset/img/hinh Product/@item.Avatar" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>@item.name</h6>
+                                        <span>@string.Format("{0:0,00}", item.price) VND</span>
+                                    </div>
+                                </a>
+
+
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+                <div class="latest-product__text">
+
+                    <h4>Best Seller</h4>
+                    @foreach (var item in Model.ListProducts.Where(n => n.category_id == 4).Take(3))
+                    {
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="@Url.Action("Product", "Product", new {ID=item.id})" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Asset/img/hinh Product/@item.Avatar" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>@item.name</h6>
+                                        <span>@string.Format("{0:0,00}", item.price) VND</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Latest Product Section End -->
